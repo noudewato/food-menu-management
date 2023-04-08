@@ -1,0 +1,63 @@
+.Reviews{
+    color: black;
+    margin-top: 20px;
+    background-color: whitesmoke;
+    text-align: center;
+    padding: 50px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.review__title{
+     font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    padding: 10px;
+    color: rgba(255, 70, 23, 0.827);
+}
+
+.review__text{
+    color: grey;
+    letter-spacing: 2px;
+}
+
+.review__name{
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.review__profession{
+    color: rgb(242, 25, 25);
+    font-weight: 500;
+}
+
+.msa{
+    float: right;
+}
+
+.ri-double-quotes-l, .ri-double-quotes-r{
+    font-size: 2.5rem;
+    color: blue;
+}
+
+.addj{
+    font-family: 'Nunito', sans-serif;
+}
+
+.about__text{
+    margin: 10px 0px;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.about__paragraph{
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.about__icon{
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(37, 232, 19);
+}

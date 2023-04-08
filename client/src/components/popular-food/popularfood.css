@@ -1,0 +1,15 @@
+.viewmore{
+    padding: 7px 35px;
+     color: white;
+     background-color: goldenrod;
+    font-size: 20px;
+    border-radius: 20px;
+    border: 1px solid goldenrod;
+}
+
+.viewmore:hover{
+    transition: .4s all;
+    color: black;
+    font-weight: 500;
+    background-color: transparent;
+}

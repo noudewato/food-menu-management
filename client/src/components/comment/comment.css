@@ -1,0 +1,26 @@
+.Comment{
+    background-color: whitesmoke;
+    min-height: 40vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment__text{
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.comment__form{
+    width: 400px;
+    margin: auto;
+}
+
+
+@media only screen and (max-width:991px) {
+    .comment__form{
+    width: 350px;
+    margin: auto;
+}
+}

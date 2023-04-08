@@ -1,0 +1,47 @@
+.navbar{
+    height: 70px;
+    border: 0.5px solid rgb(231, 228, 228);
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    .wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .icons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    .icon{
+        padding: 10px;
+    }
+
+    }
+
+    
+    .login{
+        margin-right: 50px;
+        display: flex;
+        align-items: center
+    }
+
+    .alertIcon{
+        font-size: 2rem;
+         color: rgb(0, 132, 255);
+         border: .5px solid gray;
+         border-radius: 10px;
+    }
+
+    .picture{
+cursor: pointer;
+ margin-left: 10px;
+    }
+    }
+}

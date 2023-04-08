@@ -1,0 +1,12 @@
+.dataTable{
+    margin: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px 0px rgb(0,0,0,0.5);
+    border: 1px solid rgb(0,0,0,0.5);
+}
+
+.textSearch{
+    width: 100%;
+}
+

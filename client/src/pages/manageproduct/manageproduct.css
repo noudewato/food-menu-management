@@ -1,0 +1,19 @@
+.product__title{
+    margin-left: 20px;
+}
+
+.product__btn{
+    margin-right: 20px;
+}
+
+.product-list-table{
+   padding: 20px;
+}
+
+.product__list__price{
+    font-weight: 600;
+}
+
+td{
+    width: 70px;
+}

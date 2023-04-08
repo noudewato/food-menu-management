@@ -1,0 +1,143 @@
+.single__product {
+  position: relative;
+  border: 0.5px solid lightgray;
+  margin: 10px 0;
+  padding: 1rem;
+  border-radius: 5px;
+  transition: 0.3s;
+  height: auto;
+}
+
+.product__image {
+  /* text-align: center; */
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border: 7px solid goldenrod;
+  border-radius: 50%;
+  width: "200px";
+  height: "200px";
+}
+
+.product__price {
+  position: absolute;
+  top: 200px;
+  right: 50px;
+  background-color: red;
+  font-size: 18px;
+  padding: 5px 10px 5px 0;
+  font-weight: 600;
+  color: white;
+}
+
+.cart__icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+.product__category {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 1rem;
+  padding: 2px;
+  color: red;
+}
+.product__price .currency__sign {
+  font-size: 14px;
+}
+
+.image {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+}
+
+.product__image:hover .image {
+  transform: scale(1.2);
+}
+
+.top__product__content {
+  display: flex;
+}
+
+.product__content {
+  text-align: center;
+}
+
+.product__name {
+  font-weight: 600;
+  padding: 1rem 0;
+  text-transform: capitalize;
+}
+
+.product__qty {
+  margin: 0.2rem 0 1.5rem 0;
+  padding: 0 1rem;
+}
+
+.product__description {
+  font-style: 12px;
+  color: gray;
+}
+
+.fav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: red;
+}
+
+@media only screen and (max-width: 991px) {
+  .single__product {
+    border: 0.5px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 5px 4px 8px 0px rgb(0, 0, 0, 0.1);
+    height: auto;
+  }
+  .product__image {
+    /* text-align: center; */
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 7px solid goldenrod;
+    border-radius: 50%;
+    width: "200px";
+    height: "300px";
+  }
+  .image {
+    width: 200px;
+    height: 300px;
+  }
+  .product__price {
+    position: absolute;
+    top: 200px;
+    right: 30px;
+    background-color: red;
+    font-size: 18px;
+    padding: 5px 10px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .product__name {
+    text-align: center;
+    padding: 1rem;
+    font-size: 16px;
+  }
+
+  .product__description {
+    display: none;
+  }
+
+  .product__qty {
+    margin: 0.2rem 0 2rem 0;
+    padding: 0 1rem;
+  }
+}

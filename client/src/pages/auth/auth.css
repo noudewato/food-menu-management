@@ -1,0 +1,86 @@
+.Register, .Login, .forgotPassword, .ResetPassword{
+  min-height: 100vh;
+  min-width: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   background-color: whitesmoke;
+}
+  
+.container__content {
+  width: 380px;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 4px 4px 0px rgb(0,0,0,0.1);
+}
+
+.top{
+  text-align: center;
+  padding: 10px;
+}
+
+/* //Full-width .form-controls  */
+ .formcontrol,
+.formcontrol,
+.formcontrol{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 12px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px 0px rgb(0,0,0,0.5);
+}
+
+.submit {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* //Set a style for all buttons */
+.submit {
+  background-color: rgb(119, 13, 119);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+.submit:hover {
+  opacity: 0.8;
+}
+
+.bottom{
+    padding: 10px;
+    text-align: center;
+}
+
+.bottom a{
+    text-decoration: none;
+} 
+
+.forgot{
+  text-align: center;
+}
+
+.forgot a{
+  text-decoration: none;
+  color: red;
+  cursor: pointer;
+}
+
+.forgot a:hover{
+  opacity: 0.7;
+}

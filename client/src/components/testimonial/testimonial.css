@@ -1,0 +1,44 @@
+.Testimonial{
+    background-image: url("https://t4.ftcdn.net/jpg/04/63/69/87/360_F_463698797_QqwDBblKVCcPriiYm6iwG0TQpOQb1WO9.jpg");
+    background-position: center;
+    background-size: cover;
+    min-height: 80vh;
+    position: relative;
+}
+
+.testimonialContainer{
+    position: absolute;
+   background-color: rgba(0, 0, 0, 0.536);
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   flex-direction: column;
+}
+
+.testimonialContent{
+    width: 50%;
+    text-align: center;
+}
+
+.testimonialImage{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid gold;
+}
+
+.testimonialName{
+    font-size: 26px;
+    letter-spacing: .3rem;
+
+}
+
+.testimonialJob{
+    font-size: 14px;
+    color: gold;
+}

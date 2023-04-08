@@ -1,0 +1,52 @@
+.cart__content{
+    background-color: whitesmoke;
+    padding: 1.5rem 0 2rem;
+}
+
+span{
+    color: red;
+}
+
+.cart__item__image{
+    border-radius: 15px;
+}
+
+.btn__minus, .btn__plus{
+    border: none;
+    background-color: white;
+}
+
+.btn__minus{
+    color: red;
+    font-weight: 600;
+}
+
+.btn__plus{
+    color: rgb(54, 255, 47);
+    font-weight: 600;
+}
+
+.itemName, .itemQty, .itemPrice{
+    display: none;
+}
+
+.Checkout{
+    width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+    .cart__item__image{
+    border-radius: 15px;
+    height: 300px;
+}
+
+.itemName{
+ margin-top: 1rem;
+}
+
+.itemName, .itemQty, .itemPrice{
+    display: block;
+    color: black;
+    margin: .5rem .5rem .5rem 0;
+}
+}

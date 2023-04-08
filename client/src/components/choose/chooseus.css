@@ -1,0 +1,42 @@
+.choose{
+    background-color: whitesmoke;
+    padding: 50px 0px;
+}
+
+.choose__box{
+    box-shadow: 0px 4px 8px 0px rgb(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    height: 300px;
+    cursor: pointer;
+    background-color: white;
+   margin: 1rem;
+}
+
+.choose__box:hover{
+   transition: .5s all ease-in-out;
+   transition-delay: .2s;
+    transform: scale(1.1);
+}
+
+.choose__icon{
+    margin: 0px;
+}
+.choose__icon i{
+    font-size: 50px;
+    color: white;
+    background-color: rgb(241, 47, 47);
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.choose__title{
+    margin: 10px 0px;
+}
+
+.choose__text{
+    text-align: center;
+}

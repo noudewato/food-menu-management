@@ -1,0 +1,67 @@
+.Footer{
+    background-image: url("https://cdn.pixabay.com/photo/2015/12/01/15/43/black-1072366__340.jpg");
+    background-position: center;
+    background-size: cover;
+    color: white;
+    min-height: 30vh;
+    padding: 20px 50px;
+    background-color: black;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+.single__time__content, .opening__time__title, .opening__time__text{
+   padding: 3px;
+}
+
+.opening__time,  .address__details, .header__log{
+    margin-top: 20px;
+}
+
+.text-target, .text-target1{
+    color: rgba(238, 204, 11, 0.878);
+}
+
+
+
+.ri-map-pin-line{
+    color: blue;
+   font-size: .8rem;
+}
+
+.ri-whatsapp-line{
+    color: rgb(54, 255, 47);
+   font-size: .8rem;
+}
+
+.ri-phone-line{
+   font-size: .8rem;
+}
+
+.ri-mail-line{
+    color: red;
+   font-size: .8rem;
+}
+
+.icon{
+    font-size: .9rem;
+}
+
+.copyright{
+    text-align: center;
+}
+
+.logoimage{
+    color: white;
+    background-color: white;
+}
+
+@media only screen and (max-width:991px){
+    .Footer{
+        text-align: center;
+    }
+    .copyright{
+    text-align: center;
+}
+}

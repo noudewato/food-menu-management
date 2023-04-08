@@ -1,0 +1,72 @@
+.HeroCarousel{
+    min-height: 100vh;
+}
+
+.carouselItem{
+    height: 100vh;
+    position: relative;
+}
+
+.carousel__image{
+    width: 100%;
+    object-fit: cover;
+}
+
+.carouselContent{
+    background-color: rgba(0, 0, 0, 0.374);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.carousel__paragraph{
+    width: 50%;
+    font-size: 20px;
+}
+
+.explore-btn{
+  padding: 7px 25px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: none;
+  background-color: red;
+  color: white;
+}
+
+.explore-btn:hover{
+  padding: 7px 25px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 1px solid red;
+  background-color: transparent;
+  color: white;
+  transition: .3s all;
+}
+
+@media only screen and (max-width:991px) {
+    .HeroCarousel{
+    min-height: 50vh;
+}
+
+    .carouselItem{
+    height: 50vh;
+    position: relative;
+}
+
+.carousel__paragraph{
+    width: 50%;
+    font-size: 12px;
+}
+
+.carousel__image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+}

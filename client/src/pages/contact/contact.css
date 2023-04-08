@@ -1,0 +1,29 @@
+.contact__content{
+    background-color: lightblue;
+    margin: 50px;
+}
+
+.contact__details{
+    background-color: lightblue;
+    padding: 30px 50px;
+    font-weight: 600;
+}
+
+.contact__message{
+    background-color: whitesmoke;
+    padding: 50px;
+}
+
+@media only screen and (max-width:991px) {
+    .contact__details{
+        padding: 10px;
+    }
+
+    .contact__message{
+        padding: 10px;
+    }
+
+    .btn-contact{
+        width: 100%;
+    }
+}

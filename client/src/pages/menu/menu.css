@@ -1,0 +1,32 @@
+.menu__content{
+    background-image: url("https://t4.ftcdn.net/jpg/04/63/69/87/360_F_463698797_QqwDBblKVCcPriiYm6iwG0TQpOQb1WO9.jpg");
+    background-position: center;
+    background-size: cover;
+    min-height: 60vh;
+    position: relative;
+}
+
+.menu__title{
+   color: white;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   text-align: center;
+   background-color: rgba(0, 0, 0, 0.43);
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.menu-search{
+    width: 350px;
+}
+
+@media only screen and (max-width:991px) {
+    .menu__content{
+         min-height: 30vh;
+    }
+}

@@ -1,0 +1,14 @@
+.category{
+    background-color: whitesmoke;
+    padding: 20px;
+}
+
+.btn-category{
+    border-radius: 10px;
+    margin: 10px 50px;
+    padding: 8px;
+    color: white;
+    background-color: tomato;
+    outline: none;
+    border: none;
+}

@@ -1,0 +1,17 @@
+.LayoutApp{
+    display: flex;
+    .LayoutAppContainer{
+        flex: 6;
+        margin-left: 140px;
+
+        .layoutContent{
+            padding: 1rem;
+        }
+
+        .widgets{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    }
+}
