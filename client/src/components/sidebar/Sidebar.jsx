@@ -2,6 +2,7 @@ import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import CategoryIcon from "@mui/icons-material/Category";
 // import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -29,38 +30,26 @@ const Sidebar = () => {
               <div className="menu__link">Dashboard</div>
             </Link>
           </li>
-
           <li>
             <Link to="/manage-category">
-              <DashboardIcon className="icon" />
+              <CategoryIcon className="icon" />
               <div className="menu__link">Category</div>
             </Link>
           </li>
-
-          {/* <li>
-            <CategoryIcon className="icon" />
-            <div>Category</div>
-          </li> */}
-
+          
           <li>
             <Link to="/manage-product">
               <StoreOutlinedIcon className="icon" />
               <div className="menu__link">Product</div>
             </Link>
           </li>
-
-          {/* <li>
-            <ArticleOutlinedIcon className="icon" />
-            <div>Tax</div>
-          </li> */}
-
+          
           <li>
             <Link to="/manage-order">
               <ManageAccountsOutlined className="icon" />
               <div className="menu__link">Orders</div>
             </Link>
           </li>
-
           <li>
             <Link to="/admin/manage-user">
               <AccountCircleOutlinedIcon className="icon" />

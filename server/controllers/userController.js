@@ -125,7 +125,13 @@ const deleteUser = asyncHandler(async (req, res, next) => {
 const getUserByID = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   if (user) {
-    res.json(user);
+    res.json({
+      name: user.name,
+      email: user.email,
+      image: user.image,
+      password: user.password,
+      isAdmin: user.isAdmin,
+    });
   } else {
     res.status(404);
     throw new Error("User not found");

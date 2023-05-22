@@ -2,19 +2,23 @@ import React from "react";
 import "./managecategory.css";
 import Layout from "../../components/layout/Layout";
 import CategoryDatatable from "../../components/dataTable/CategoryDatatable";
-// import {Link} from "react-router-dom"
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
+import {Link} from "react-router-dom"
 const OrderList = () => {
   return (
     <div>
       <Layout>
         <div className="category__header">
           <Row>
-            <Col>
-              <h2>Manage Category</h2>
+            <Col className="d-flex align-items-center">
+              <h2>Manage Categories</h2>
             </Col>
-            <Col>
-              add Category
+            <Col className="text-end">
+              <Link to="/admin/add-category">
+                <Button className="my-3 product__btn">
+                  <i class="ri-add-line"></i> Create Category
+                </Button>
+              </Link>
             </Col>
           </Row>
         </div>

@@ -1,105 +1,104 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import "./datatable.css";
 import { getOrderList } from "../../actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
-import DataTable from "react-data-table-component";
+import MaterialReactTable from "material-react-table";
 import Loader from "../Loader";
 import Message from "../Message";
-import { Box, Input } from "@mui/material";
-import { Badge, Button, Col, Row } from "react-bootstrap";
+import { Box, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const OrderDatatable = () => {
-  const columns = [
-    {
-      name: "id",
-      selector: (row) => row._id.substring(0, 6),
-    },
-    // {
-    //   name: "image",
-    //   cell: (row) => (
-    //     <div>
-    //       <img src={row.orderItems[0].image} alt={row.orderItems[0].name} />
-    //     </div>
-    //   ),
-    // },
-    {
-      name: "User",
-      selector: (row) => row.user?.name,
-    },
-    {
-      name: "Date",
-      selector: (row) => row.createdAt.substring(0, 10),
-    },
-    {
-      name: "Total",
-      selector: (row) => <p># {row.totalPrice}</p>,
-    },
-    {
-      name: "Paid",
-      selector: (row) => (
-        <p>
-          {row.isPaid ? (
-            <Badge className="success">{row.paidAt.substring(0, 10)}</Badge>
-          ) : (
-            <Badge className="bg-danger">No</Badge>
-          )}
-        </p>
-      ),
-    },
-    {
-      name: "Delivered",
-      selector: (row) => (
-        <p>
-          {row.isDelivered ? (
-            <Badge className="bg-success">
-              {row.deliveredAt.substring(0, 10)}
-            </Badge>
-          ) : (
-            <Badge className="bg-danger">No</Badge>
-          )}
-        </p>
-      ),
-    },
-    {
-      name: "Action",
-      cell: (row) => (
-        <Link to={`/orderDetails/${row._id}`}>
-          <Button> Details </Button>
-        </Link>
-      ),
-    },
-  ];
+
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "_id", //access nested data with dot notation
+        header: "Order No.",
+        size: 100,
+        Cell: ({ row }) => (
+          <>
+            {row.original.status === 1 ? (
+              <div className="underline">
+                {row.original._id.substring(0, 9)}
+              </div>
+            ) : (
+              <div>{row.original._id.substring(0, 9)}</div>
+            )}
+          </>
+        ),
+      },
+      {
+        accessorKey: "user.name",
+        header: "Name",
+        size: 100,
+      },
+      {
+        accessorKey: "totalPrice",
+        header: "Amount",
+        size: 50,
+        Cell: ({ row }) => (
+          <div>
+            <span> ₵</span>
+            {row.original.totalPrice}
+          </div>
+        ),
+      },
+      {
+        accessorKey: "paid",
+        header: "Paid",
+        size: 50,
+        Cell: ({ row }) => (
+          <>
+            {row.original.isPaid ? (
+              <div style={{ color: "lightgreen", fontWeight: "bolder" }}>
+                Paid
+              </div>
+            ) : (
+              <div style={{ color: "red" }}>No</div>
+            )}
+          </>
+        ),
+      },
+      {
+        accessorKey: "createdAt",
+        header: "Order Date",
+        size: 150,
+        Cell: (row) => moment(row.createdAt).format("YYYY-MM-DD/HH-MM-SS"),
+      },
+      {
+        accessorKey: "status",
+        header: "Status",
+        size: 80,
+        Cell: ({ row }) => (
+          <>
+            {row.original.status === 0 ? (
+              <div style={{ color: "orange", fontWeight: "bolder" }}>
+                Pending...
+              </div>
+            ) : row.original.status === 1 ? (
+              <div style={{ color: "yellow" }}>Preparing...</div>
+            ) : row.original.status === 2 ? (
+              <div style={{ color: "tomato" }}>Ready...</div>
+            ) : (
+              <div style={{ color: "red" }}>isDelivered.</div>
+            )}
+          </>
+        ),
+      },
+    ],
+    // eslint-disable-next-line
+    []
+  );
   const dispatch = useDispatch();
   const { loading, orders, error } = useSelector((state) => state.orderList);
-  // console.log(orders);
 
   useEffect(() => {
     dispatch(getOrderList());
   }, [dispatch]);
-
-  const [records, setRecords] = useState(orders)
-
-  const filterHandler = (e) => {
-    const newData = orders.filter(row => { return row.user?.name.toLowerCase().includes(e.target.value.toLowerCase()); })
-    setRecords(newData)
-  }
-
   return (
     <div className="orderDataTable">
-      {/* <div className="dataTable">
-        <Row>
-          <Col>Manage Orders</Col>
-          <Col>
-            <input
-              className="textSearch"
-              type="text"
-              onChange={filterHandler}
-              placeholder="type to search"
-            />
-          </Col>
-        </Row>
-      </div> */}
 
       {loading ? (
         <Loader />
@@ -107,24 +106,41 @@ const OrderDatatable = () => {
         <Message>{error}</Message>
       ) : (
         <div className="dataTable">
-          <Box sx={{ height: 750, width: "100%" }}>
-            <DataTable
-              title="Manage Orders"
+          <Box sx={{ height: "auto", width: "100%" }}>
+            <MaterialReactTable
               columns={columns}
-              data={records}
-              striped={true}
-              actions={
-                <div>
-                  <Button>Add New</Button>
-                  <Button>export</Button>
-                  <Button>Print</Button>
-                </div>
-              }
-              pagination
-              subHeader
-              subHeaderComponent={
-                <input className="w-50" type="text" onChange={filterHandler} />
-              }
+              data={orders}
+              enableColumnActions={false}
+              enableColumnFilters={false}
+              enableSorting={false}
+              enableBottomToolbar={true}
+              //   enableTopToolbar={false}
+              enableDensityToggle={false}
+              enableHiding={false}
+              enableFullScreenToggle={false}
+              muiTableBodyRowProps={{ hover: false }}
+              initialState={{
+                showGlobalFilter: true,
+              }}
+              muiSearchTextFieldProps={{
+                placeholder: "Search all orders",
+                sx: { minWidth: "400px" },
+                variant: "outlined",
+              }}
+              enableRowActions
+              renderRowActions={({ row, table }) => (
+                <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "4px" }}>
+                  <IconButton color="primary">
+                    <Link
+                      className="text-primary"
+                      to={`/orderDetails/${row.original._id}`}
+                    >
+                      Details
+                    </Link>
+                  </IconButton>
+                </Box>
+              )}
+              positionActionsColumn="last"
             />
           </Box>
         </div>

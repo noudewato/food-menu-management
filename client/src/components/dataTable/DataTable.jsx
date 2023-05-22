@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./datatable.css";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../components/Loader";
@@ -11,8 +11,8 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { Avatar } from "@mui/material";
 import moment from "moment";
-import EditProductForm from "../product-form/EditProductForm";
-import NewEditProduct from "../product-form/NewEditProduct";
+// import EditProductForm from "../product-form/EditProduct";
+// import NewEditProduct from "../product-form/NewEditProduct";
 
 const DataTable = () => {
   const dispatch = useDispatch();

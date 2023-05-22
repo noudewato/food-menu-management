@@ -25,10 +25,8 @@ const Products = ({ item }) => {
     anchorPlacement: "top-bottom",
   });
 
-  const [qty, setQty] = useState(1)
-
   const addToCartHandler = () => {
-   dispatch(addToCart(item, qty))
+   dispatch(addToCart(item))
   }
 
   return (
@@ -64,11 +62,11 @@ const Products = ({ item }) => {
             className="product__qty"
           /> */}
 
-          <select value={qty} onChange={(e) => setQty(e.target.value)} className="product__qty">
+          {/* <select value={qty} onChange={(e) => setQty(e.target.value)} className="product__qty">
             {[...Array(10).keys()].map((x, i) => (
               <option key={i + 1} value={i + 1}>{i + 1}</option>
             ))}
-          </select>
+          </select> */}
           {/* <div className="product__description">{item.description}</div> */}
         </div>
         <div className="product__category">{item.category}</div>

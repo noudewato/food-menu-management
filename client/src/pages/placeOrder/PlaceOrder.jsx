@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { addOrder } from "../../actions/orderActions";
 import Message from "../../components/Message";
 import "./placeorder.css";
-// import { CLEAR_CART } from "../../constants/cartConstants";
-// import { ORDER_CREATE_RESET } from "../../constants/orderConstants";
+import { CLEAR_CART } from "../../constants/cartConstants";
+import { ORDER_CREATE_RESET } from "../../constants/orderConstants";
 
 const PlaceOrder = () => {
   const dispatch = useDispatch();
@@ -22,17 +22,6 @@ const PlaceOrder = () => {
 
   const createOrder = useSelector((state) => state.createOrder);
   const { error, success, createdOrder } = createOrder;
-
-  useEffect(() => {
-    // dispatch({
-    //     type: ORDER_CREATE_RESET,
-    //   })
-    if (success) {
-      navigate(`/order/${createdOrder.createdOrder._id}`);
-      // eslint-disable-next-line
-    }
-    // eslint-disable-next-line
-  }, [success, navigate, createdOrder]);
 
   const AddRoundedNumber = (num) =>
     Math.round(num * 100 + Number.EPSILON) / 100;
@@ -53,9 +42,8 @@ const PlaceOrder = () => {
   );
 
   const placeOrderHandler = () => {
-      //    dispatch({
-      //   type: CLEAR_CART,
-      // })
+     
+    
     dispatch(
       addOrder({
         orderItems: cartItems,
@@ -65,13 +53,29 @@ const PlaceOrder = () => {
         deliverPrice: cartItems.deliverPrice,
         taxPrice: cartItems.taxPrice,
         totalPrice: cartItems.totalPrice,
-      })
-      
+        isPaid: true
+      })      
     );
 
-    // localStorage.removeItem("cartItems")
-    // localStorage.removeItem("deliverAddress");
+    dispatch({
+       type: CLEAR_CART,
+     });
+
+    
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("deliverAddress");
+ 
   };
+
+  useEffect(() => {
+    dispatch({ type: ORDER_CREATE_RESET });
+    if (success) {
+      navigate(`/order/${createdOrder.createdOrder._id}`);
+
+      // eslint-disable-next-line
+    }
+  }, [success, navigate, createdOrder, dispatch]);
+
 
   return (
     <div>

@@ -5,7 +5,6 @@ import Message from "../../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
 import './auth.css'
-import Header from "../../components/header/Header";
 
 const Login = () => {
   const location = useLocation();
@@ -37,7 +36,6 @@ const Login = () => {
 
   return (
     <div>
-      <Header/>
       <div className="Login">
         <div className="container__content">
           <div className="top">

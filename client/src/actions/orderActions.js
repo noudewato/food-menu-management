@@ -1,5 +1,18 @@
 import axios from "axios"
-import { ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_DETAILS_FAIL, ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_LIST_FAIL  } from "../constants/orderConstants";
+import {
+  ORDER_CREATE_REQUEST,
+  ORDER_CREATE_SUCCESS,
+  ORDER_CREATE_FAIL,
+  ORDER_DETAILS_REQUEST,
+  ORDER_DETAILS_SUCCESS,
+  ORDER_DETAILS_FAIL,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAIL,
+  ORDER_UPDATE_STATUS_REQUEST,
+  ORDER_UPDATE_STATUS_SUCCESS,
+  ORDER_UPDATE_STATUS_FAIL,
+} from "../constants/orderConstants";
 
 export const addOrder = (order) => async (dispatch, getState) => {
   try {
@@ -96,6 +109,39 @@ export const getOrderList = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const orderStatusUpdate = (order) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ORDER_UPDATE_STATUS_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/orders/${order._id}/status`, {}, config);
+
+    dispatch({
+      type: ORDER_UPDATE_STATUS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_UPDATE_STATUS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

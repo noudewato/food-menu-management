@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import "./datatable.css";
-import { Button } from 'react-bootstrap'
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import MaterialReactTable from "material-react-table";
 import Loader from "../Loader";
 import Message from "../Message";
 import { listUsers, deleteUser } from "../../actions/userActions";
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
-import { Avatar } from "@mui/material";
-import moment from 'moment'
+import { Box, Avatar, IconButton } from "@mui/material";
+import {
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Visibility as VisibilityIcon,
+} from "@mui/icons-material";
+import moment from "moment";
 
 const DataTable = () => {
   const dispatch = useDispatch();
@@ -19,15 +22,11 @@ const DataTable = () => {
   const { loading, error, users } = userList;
   console.log(users);
 
+  const userDelete = useSelector((state) => state.userDelete);
+  const { loading:loadingDelete, error:errorDelete, success:successDelete } = userDelete;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  const productDelete = useSelector((state) => state.productDelete);
-  const {
-    success: successDelete,
-    loading: loadingDelete,
-    error: errorDelete,
-  } = productDelete;
 
   useEffect(() => {
     if (!userInfo.isAdmin) {
@@ -37,59 +36,100 @@ const DataTable = () => {
     dispatch(listUsers());
   }, [userInfo, navigate, dispatch]);
 
-  const deleteHandler = () => {
-    if (window.confirm("Are you sure you want to delete")) {
-      dispatch(deleteUser);
+  useEffect(() => {
+    if (successDelete) {
+      dispatch(listUsers())
     }
-  };
-  
+  },[dispatch, successDelete])
 
-   const actionColumn = [
-     {
-       field: "Action",
-       headerName: "Action",
-       width: 200,
-       renderCell: (params) => {
-         return (
-           <div className="cellAction">
-             <Link to={`/admin/edit-product/${params.row._id}`}>
-               <Button variant="light" className="btn-sm mx-1">
-                 <i class="ri-eye-line"></i>
-               </Button>
-             </Link>
-             <Link to={`/admin/edit-product/${params.row}`}>
-               <Button variant="success" className="btn-sm me-1">
-                 <i class="ri-edit-line"></i>
-               </Button>
-             </Link>
-             <Button
-               variant="danger"
-               className="btn-sm me-1"
-               onClick={() => deleteHandler(params.row)}
-             >
-               <i class="ri-delete-bin-line"></i>
-             </Button>
-           </div>
-         );
-       },
-     },
-   ];
+
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "image",
+        header: "Image",
+        size: 100,
+        Cell: ({ row }) => (
+          <Avatar src={row.original.image} alt={row.original.name} />
+        ),
+      },
+      {
+        accessorKey: "name",
+        header: "Name",
+        size: 150,
+      },
+      {
+        accessorKey: "email",
+        header: "Email",
+        size: 150,
+      },
+      {
+        accessorKey: "isAdmin",
+        header: "Admin",
+        size: 100,
+        Cell: ({ row }) => (
+          <div>{row.original.isAdmin ? <>Yes</> : <>No</>}</div>
+        ),
+      },
+      {
+        accessorKey: "createdAt",
+        header: "Created Date",
+        size: 150,
+        Cell: (row) => moment(row.createdAt).format("YYYY-MM-DD/HH-MM-SS"),
+      },
+    ],
+    []
+  );
 
   return (
     <div className="dataTable">
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Box sx={{ height: 630, width: "100%" }}>
-          <DataGrid
-            rows={users}
-            columns={columns.concat(actionColumn)}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
-            experimentalFeatures={{ newEditingApi: true }}
-            getRowId={(row) => row._id}
+        <Box sx={{ height: "auto", width: "100%" }}>
+          <MaterialReactTable
+            columns={columns}
+            data={users}
+            enableColumnActions={false}
+            enableColumnFilters={false}
+            enableSorting={false}
+            enableBottomToolbar={true}
+            enableDensityToggle={false}
+            enableHiding={false}
+            enableFullScreenToggle={false}
+            muiTableBodyRowProps={{ hover: false }}
+            initialState={{
+              showGlobalFilter: true,
+            }}
+            muiSearchTextFieldProps={{
+              placeholder: "Search all users",
+              sx: { minWidth: "400px" },
+              variant: "outlined",
+            }}
+            enableRowActions
+            renderRowActions={({ row }) => (
+              <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "4px" }}>
+                <IconButton color="primary">
+                  <VisibilityIcon />
+                </IconButton>
+                <IconButton color="success">
+                  <Link
+                    className="text-success"
+                    to={`/admin/edit-user/${row.original._id}`}
+                  >
+                    <EditIcon />
+                  </Link>
+                </IconButton>
+                <IconButton color="error" onClick={()=> dispatch(deleteUser(row.original._id))}>
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
+            )}
+            positionActionsColumn="last"
           />
         </Box>
       )}
@@ -98,58 +138,3 @@ const DataTable = () => {
 };
 
 export default DataTable;
-
-const columns = [
-  // {
-  //   field: "image",
-  //   headerName: "Image",
-  //   width: 70,
-  //   editable: true,
-  //   renderCell: (params) => <Avatar src={params.row.image} />,
-  // },
-  {
-    field: "name",
-    headerName: "Name",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "email",
-    headerName: "Email",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "isAdmin",
-    headerName: "Admin",
-    width: 100,
-    editable: true,
-  },
-  {
-    field: "createdAt",
-    headerName: "createdAt",
-    width: 200,
-    editable: false,
-    filtereable: false,
-    renderCell: (params) =>
-      moment(params.row.createdAt).format("YYYY-MM-DD/HH-MM-SS"),
-  },
-  {
-    field: "updatedAt",
-    headerName: "updatedAt",
-    width: 200,
-    editable: false,
-    filtereable: false,
-    renderCell: (params) =>
-      moment(params.row.createdAt).format("YYYY-MM-DD/HH-MM-SS"),
-  },
-  //   {
-  //     field: "fullName",
-  //     headerName: "Full name",
-  //     description: "This column has a value getter and is not sortable.",
-  //     sortable: false,
-  //     width: 160,
-  //     valueGetter: (params) =>
-  //       `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  //   },
-];

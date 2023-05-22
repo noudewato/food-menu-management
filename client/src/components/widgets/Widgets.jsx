@@ -24,19 +24,19 @@ const Widgets = () => {
   return (
     <div className="Widgets">
       <div className="single__widgets ">
-        <span className="greeting">Welcome</span>
-        <span className="userName">{userInfo?.name}</span>
+        <span className="cat">Categories</span>
+        <span className="userName">{products?.length}</span>
       </div>
 
       <div className="single__widgets">
-        <span className="greeting">
+        <span className="product">
           <i class="ri-product-hunt-line"></i>Products
         </span>
         <span className="userName">{products?.length}</span>
       </div>
 
       <div className="single__widgets"> {" "}
-        <span className="greeting">
+        <span className="user">
           <i class="ri-user-line"></i>Users
         </span>
         <span className="userName">{users?.length}</span>

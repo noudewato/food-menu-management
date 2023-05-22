@@ -20,22 +20,26 @@ import {
   userUpdateReducer,
 } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
-import { createOrderReducer, orderDetailsReducer, orderListReducer } from "./reducers/orderReducers";
-import { categoryListAdminReducer } from "./reducers/categoryReducer";
+import { createOrderReducer, orderDetailsReducer, orderListReducer, updateOrderStatusReducer } from "./reducers/orderReducers";
+import { categoryCreateReducer, categoryDeleteReducer, categoryDetailsReducer, categoryListAdminReducer, categoryUpdateReducer } from "./reducers/categoryReducer";
 
 const reducer = combineReducers({
   cart: cartReducer,
   categoryList: categoryListAdminReducer,
+  categoryDetails: categoryDetailsReducer,
+  categoryUpdate: categoryUpdateReducer,
+  categoryDelete: categoryDeleteReducer,
+  categoryCreate: categoryCreateReducer,
   createOrder: createOrderReducer,
   orderDetails: orderDetailsReducer,
   orderList: orderListReducer,
+  orderStatus: updateOrderStatusReducer,
   productList: productListReducer,
   productListAdmin: productListAdminReducer,
   productDetails: productDetailsReducer,
   productDelete: productDeleteReducer,
   productCreate: productCreateReducer,
   productUpdate: productUpdateReducer,
-  //   cart: cartReducers,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,

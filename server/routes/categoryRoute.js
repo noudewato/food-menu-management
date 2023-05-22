@@ -3,7 +3,10 @@ const { createCategory, getAllCategory, updateCategory, deleteCategory, getCateg
 const categoryRouter = express.Router()
 const { protect, admin } = require("../middleware/authMiddleware");
 
-categoryRouter.route("/").post(protect, createCategory).get(getAllCategory)
-categoryRouter.route("/:id").get(protect,admin,getCategoryById).put(protect, updateCategory).delete(protect, admin, deleteCategory);
+categoryRouter
+  .route("/")
+  .post(protect, createCategory)
+  .get(protect, admin, getAllCategory);
+categoryRouter.route("/:id").get(getCategoryById).put(protect,admin,updateCategory).delete(protect, admin, deleteCategory);
 
 module.exports = categoryRouter;

@@ -15,23 +15,24 @@ const getProducts = asyncHandler(async (req, res) => {
   const page = Number(req.query.pageNumber) || 1;
 
   const count = await Product.countDocuments();
-  const products = await Product.find({ ...keyword })
+  const products = await Product.find({ ...keyword }).sort({name: "ascending"})
+    .populate("user", "name")
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 const getAdminProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find()
+  const products = await Product.find().sort({name: "ascending"}).populate("user", "name");
 
   if (products) {
-    res.status(201)
-    res.json({success:true, products})
+    res.status(201);
+    res.json({ success: true, products });
   } else {
     res.status(401);
-    res.json({ success: true, message:"Products not found", ...keyword });
+    res.json({ success: true, message: "Products not found", ...keyword });
   }
-})
+});
 
 const getProductById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
@@ -73,7 +74,7 @@ const createProduct = asyncHandler(async (req, res) => {
 });
 
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, image, description, brand, category, price, countInStock } =
+  const { name, image, description, category, price } =
     req.body;
 
   const product = await Product.findById(req.params.id);
@@ -82,10 +83,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     (product.name = name),
       (product.image = image),
       (product.description = description),
-      (product.brand = brand),
       (product.category = category),
-      (product.price = price),
-      (product.countInStock = countInStock);
+      (product.price = price)
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);
@@ -107,13 +106,13 @@ const productByCategory = asyncHandler(async (req, res) => {
     { $project: { name: "$_id", products: 1, _id: 0 } },
   ]);
   if (products) {
-    res.status(201)
-      res.json({ success: true, products });
+    res.status(201);
+    res.json({ success: true, products });
   } else {
-    res.status(400)
-    throw new Error("Cannot display categories")
+    res.status(400);
+    throw new Error("Cannot display categories");
   }
-})
+});
 
 // const getMyProducts = asyncHandler(async (req, res) => {
 //   const qN = req.query.newProduct
@@ -123,7 +122,7 @@ const productByCategory = asyncHandler(async (req, res) => {
 //     let products;
 //     products = await Product.find().sort({createdAt: -1})
 //   }
-  
+
 // });
 
 module.exports = {
@@ -133,5 +132,5 @@ module.exports = {
   deleteProduct,
   createProduct,
   updateProduct,
-  productByCategory
+  productByCategory,
 };

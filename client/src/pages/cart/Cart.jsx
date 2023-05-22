@@ -1,5 +1,5 @@
-import React from "react";
-import { Col, Container, ListGroup, Row, Button, Card } from "react-bootstrap";
+import React, {useState} from "react";
+import { Col, Container, ListGroup, Row, Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import Footer from "../../components/footer/Footer";
@@ -7,12 +7,13 @@ import Header from "../../components/header/Header";
 import "./cart.css";
 import { Link, useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { addToCart, removeFromCart } from "../../actions/cartActions";
+import { addToCart, removeFromCart, reduceItemFromCart } from "../../actions/cartActions";
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+   const { cartItems, deliverAddress, paymentMethod } = cart;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const { cartItems } = cart;
+ 
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,6 +29,11 @@ const Cart = () => {
       navigate("/deliverAddress");
     }
   };
+
+  const [address, setAddress] = useState(deliverAddress?.address);
+  const [phonenumber, setPhoneNumber] = useState("");      
+    
+  const [paymentMethodName , setPaymentMethod] = useState(paymentMethod || 'mobile money' || 'cash on delivery')
 
   return (
     <div className="cart">
@@ -69,13 +75,13 @@ const Cart = () => {
                             <button
                               className="btn__minus"
                               onClick={() => {
-                                dispatch(addToCart(item, item.qty - 1));
+                                dispatch(reduceItemFromCart(item));
                               }}
                               disabled={item.qty === 1}
                             >
                               -
-                            </button>{" "}
-                            {item.qty}{" "}
+                            </button>
+                            {item.qty}
                             <button
                               className="btn__plus"
                               onClick={() => {
@@ -113,6 +119,60 @@ const Cart = () => {
               )}
             </Col>
             <Col md={4}>
+              <ListGroup>
+                <ListGroup.Item>
+                  <h2>Customer Info</h2>
+                  <Form>
+                    <Form.Group className="mb-3" controlId="address">
+                      <Form.Label>Address</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="enter address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="number">
+                      <Form.Label>Phone Number</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="enter number"
+                        value={phonenumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Form>
+                </ListGroup.Item>
+              </ListGroup>
+
+              <ListGroup>
+                <ListGroup.Item>
+                  <h4>Payment Method</h4>
+                  <Form.Label as="legend">Select Method</Form.Label>
+                  <Form.Group className="mb-3">
+                    <Form.Check
+                      id="Mobile Money"
+                      type="radio"
+                      label="Mobile Money"
+                      value="Mobile Money"
+                      checked={paymentMethodName === "Mobile Money"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Check
+                      id="Cash On Delivery"
+                      type="radio"
+                      label="Cash On Delivery"
+                      value="Cash On Delivery"
+                      checked={paymentMethodName === "Cash On Delivery"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                  </Form.Group>
+                </ListGroup.Item>
+              </ListGroup>
+
               <Card>
                 <ListGroup>
                   <ListGroup.Item>

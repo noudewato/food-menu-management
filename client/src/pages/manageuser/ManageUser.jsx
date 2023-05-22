@@ -24,11 +24,6 @@ const ManageProduct = () => {
         <Col>
           <h2 className="product__title">Manage Users</h2>
         </Col>
-        <Col className="text-end">
-          <Form>
-            <Form.Control placeholder="Search Products..." />
-          </Form>
-        </Col>
       </Row>
       <UserDataTable/>
     </Layout>

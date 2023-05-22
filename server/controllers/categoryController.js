@@ -11,15 +11,15 @@ const createCategory = asyncHandler(async (req, res) => {
   if (saveCategory) {
     res
       .status(201)
-      .json({ success: "Category Created Successfully", saveCategory });
+      .json(saveCategory);
   } else {
     res.status(404);
-    throw new Error("Could not save Product");
+    throw new Error("Could not save Product, Try again");
   }
 });
 
 const getAllCategory = asyncHandler(async (req, res) => {
-  const allCategory = await Category.find().sort({name:"ascending"});
+  const allCategory = await Category.find().sort({name:"ascending"}).populate("user", "name");
 
   if (allCategory) {
     res.status(200).json(allCategory);
